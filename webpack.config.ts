@@ -1,20 +1,22 @@
-const path = require('path');
-const HTMLWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+import webpack from 'webpack';
+import 'webpack-dev-server';
+import path from 'path';
+import HTMLWebpackPlugin from 'html-webpack-plugin';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin'
 
-module.exports = {
+const config: webpack.Configuration = {
     context: path.resolve(__dirname, 'src'),
     entry: path.resolve(__dirname, 'src', 'index.tsx'),
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'main.js',
+        filename: '[name].[contenthash].js',
     },
     devServer: {
         port: 3000,
     },
     plugins: [
         new HTMLWebpackPlugin({
-            template: './index.html',
+            template: path.resolve(__dirname, 'public', 'index.html'),
         }),
         new CleanWebpackPlugin(),
     ],
@@ -31,4 +33,9 @@ module.exports = {
             },
         ],
     },
+    resolve: {
+        extensions: ['ts', 'tsx', 'js', 'jsx']
+    }
 };
+
+export default config;
