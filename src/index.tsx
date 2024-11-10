@@ -1,9 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { main } from './main';
+import App from './app/App';
 
 const root = createRoot(document.getElementById('root'));
 
-root.render(<h1>Hello, React! I love you.</h1>);
-
-main();
+root.render(<App />);
