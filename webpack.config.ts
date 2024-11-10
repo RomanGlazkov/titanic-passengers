@@ -10,7 +10,7 @@ const config: webpack.Configuration = {
     entry: path.resolve(__dirname, 'src', 'index.tsx'),
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: '[name].[contenthash].js',
+        filename: '[name].[contenthash:8].js',
     },
     devServer: {
         port: 3000,
@@ -20,7 +20,9 @@ const config: webpack.Configuration = {
             template: path.resolve(__dirname, 'public', 'index.html'),
         }),
         new CleanWebpackPlugin(),
-        new MiniCssExtractPlugin(),
+        new MiniCssExtractPlugin({
+            filename: '[name].[contenthash:8].css',
+        }),
     ],
     module: {
         rules: [
@@ -36,7 +38,12 @@ const config: webpack.Configuration = {
             {
                 test: /\.s[ac]ss$/i,
                 use: [
-                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: MiniCssExtractPlugin.loader,
+                        options: {
+                            defaultExport: true,
+                        },
+                    },
                     'css-loader',
                     'sass-loader',
                 ],
