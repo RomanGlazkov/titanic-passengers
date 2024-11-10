@@ -2,7 +2,8 @@ import webpack from 'webpack';
 import 'webpack-dev-server';
 import path from 'path';
 import HTMLWebpackPlugin from 'html-webpack-plugin';
-import { CleanWebpackPlugin } from 'clean-webpack-plugin'
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 const config: webpack.Configuration = {
     context: path.resolve(__dirname, 'src'),
@@ -19,6 +20,7 @@ const config: webpack.Configuration = {
             template: path.resolve(__dirname, 'public', 'index.html'),
         }),
         new CleanWebpackPlugin(),
+        new MiniCssExtractPlugin(),
     ],
     module: {
         rules: [
@@ -29,13 +31,21 @@ const config: webpack.Configuration = {
             },
             {
                 test: /\.css$/,
-                use: ['style-loader', 'css-loader'],
+                use: [MiniCssExtractPlugin.loader, 'css-loader'],
+            },
+            {
+                test: /\.s[ac]ss$/i,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    'css-loader',
+                    'sass-loader',
+                ],
             },
         ],
     },
     resolve: {
-        extensions: ['.ts', '.tsx', '.js', '.jsx']
-    }
+        extensions: ['.ts', '.tsx', '.js', '.jsx'],
+    },
 };
 
 export default config;
