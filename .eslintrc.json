@@ -26,6 +26,27 @@
         "react/jsx-filename-extension": ["warn", { "extensions": [".tsx"] }],
         "no-shadow": "off",
         "@typescript-eslint/no-shadow": "error",
-        "max-len": ["warn", { "code": 120 }]
+        "@typescript-eslint/no-unused-vars": "warn",
+        "max-len": ["warn", { "code": 120 }],
+        "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+        "import/extensions": [
+            "error",
+            "ignorePackages",
+            {
+                "ts": "never",
+                "tsx": "never",
+                "js": "never"
+            }
+        ]
+    },
+    "settings": {
+        "import/resolver": {
+            "typescript": {
+                "alwaysTryTypes": true
+            },
+            "node": {
+                "extensions": [".js", ".jsx", ".ts", ".d.ts", ".tsx"]
+            }
+        }
     }
 }
