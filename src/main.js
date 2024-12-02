@@ -31,7 +31,7 @@ export function main() {
             passengers = await findPassengers(inputValue, select.value);
 
             if (passengers.length === 0) {
-            passengersList.textContent = 'Nothing to display!';
+                passengersList.textContent = 'Nothing to display!';
             }
 
             start = 0;
@@ -70,7 +70,7 @@ export function main() {
             const { value } = event.target;
 
             await displayFoundedPassengers(value);
-        }, 300)
+        }, 300),
     );
 
     select.addEventListener('change', async () => {
